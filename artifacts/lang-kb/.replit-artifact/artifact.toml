@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Programmiersprachen-Wissensdatenbank"
+version = "1.0.0"
+id = "artifacts/lang-kb"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25620
+
+[services.development]
+run = "pnpm --filter @workspace/lang-kb run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lang-kb", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/lang-kb/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25620"
+BASE_PATH = "/"

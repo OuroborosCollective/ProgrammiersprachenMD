@@ -3,13 +3,17 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Programmiersprachen-Wissensdatenbank API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: languages
+    description: Programming language knowledge base
+  - name: crawler
+    description: Web crawler operations
 paths:
   /healthz:
     get:
@@ -24,6 +28,114 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /languages:
+    get:
+      operationId: listLanguages
+      tags: [languages]
+      summary: List all programming languages
+      description: Returns a summary list of all languages in the knowledge base
+      responses:
+        "200":
+          description: List of language summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LanguageSummary"
+
+  /languages/{slug}:
+    get:
+      operationId: getLanguage
+      tags: [languages]
+      summary: Get a language by slug
+      description: Returns full detail and Markdown content for a programming language
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Language detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LanguageDetail"
+        "404":
+          description: Language not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+
+  /search:
+    get:
+      operationId: searchLanguages
+      tags: [languages]
+      summary: Search languages
+      description: Full-text search across all language entries
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query
+      responses:
+        "200":
+          description: Matching language summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LanguageSummary"
+
+  /crawl/{slug}:
+    post:
+      operationId: crawlLanguage
+      tags: [crawler]
+      summary: Trigger crawler for a language
+      description: Fetches fresh data from the web and updates the language entry
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Crawler result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrawlResult"
+        "404":
+          description: Language not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+
+  /crawl:
+    post:
+      operationId: crawlAllLanguages
+      tags: [crawler]
+      summary: Trigger crawler for all languages
+      description: Crawls all language entries and updates them with fresh web data
+      responses:
+        "200":
+          description: Aggregated crawler results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CrawlResult"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +146,78 @@ components:
       required:
         - status
 
+    LanguageSummary:
+      type: object
+      required: [slug, name, paradigms, description, tags]
+      properties:
+        slug:
+          type: string
+          description: URL-safe identifier (e.g. "python", "typescript")
+        name:
+          type: string
+          description: Display name of the language
+        year:
+          type: ["integer", "null"]
+          description: Year the language was first released
+        paradigms:
+          type: array
+          items:
+            type: string
+          description: Programming paradigms (e.g. ["object-oriented", "functional"])
+        description:
+          type: string
+          description: One-line description of the language
+        tags:
+          type: array
+          items:
+            type: string
+          description: Categorisation tags
+        lastCrawled:
+          type: ["string", "null"]
+          description: ISO 8601 timestamp of last web crawl
+
+    LanguageDetail:
+      type: object
+      required: [slug, name, paradigms, description, tags, content]
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        year:
+          type: ["integer", "null"]
+        paradigms:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        content:
+          type: string
+          description: Full Markdown content of the knowledge-base entry
+        lastCrawled:
+          type: ["string", "null"]
+
+    CrawlResult:
+      type: object
+      required: [slug, success, message, updatedAt]
+      properties:
+        slug:
+          type: string
+        success:
+          type: boolean
+        message:
+          type: string
+        updatedAt:
+          type: string
+
+    ApiError:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
