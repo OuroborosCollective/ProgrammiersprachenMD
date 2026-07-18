@@ -28,7 +28,8 @@ export const ListLanguagesResponseItem = zod.object({
   "paradigms": zod.array(zod.string()).describe('Programming paradigms (e.g. [\"object-oriented\", \"functional\"])'),
   "description": zod.string().describe('One-line description of the language'),
   "tags": zod.array(zod.string()).describe('Categorisation tags'),
-  "lastCrawled": zod.string().nullish().describe('ISO 8601 timestamp of last web crawl')
+  "lastCrawled": zod.string().nullish().describe('ISO 8601 timestamp of last web crawl'),
+  "lastGithubCrawled": zod.string().nullish().describe('ISO 8601 timestamp of last GitHub crawl')
 })
 export const ListLanguagesResponse = zod.array(ListLanguagesResponseItem)
 
@@ -49,7 +50,8 @@ export const GetLanguageResponse = zod.object({
   "description": zod.string(),
   "tags": zod.array(zod.string()),
   "content": zod.string().describe('Full Markdown content of the knowledge-base entry'),
-  "lastCrawled": zod.string().nullish()
+  "lastCrawled": zod.string().nullish(),
+  "lastGithubCrawled": zod.string().nullish()
 })
 
 
@@ -68,14 +70,31 @@ export const SearchLanguagesResponseItem = zod.object({
   "paradigms": zod.array(zod.string()).describe('Programming paradigms (e.g. [\"object-oriented\", \"functional\"])'),
   "description": zod.string().describe('One-line description of the language'),
   "tags": zod.array(zod.string()).describe('Categorisation tags'),
-  "lastCrawled": zod.string().nullish().describe('ISO 8601 timestamp of last web crawl')
+  "lastCrawled": zod.string().nullish().describe('ISO 8601 timestamp of last web crawl'),
+  "lastGithubCrawled": zod.string().nullish().describe('ISO 8601 timestamp of last GitHub crawl')
 })
 export const SearchLanguagesResponse = zod.array(SearchLanguagesResponseItem)
 
 
 /**
- * Fetches fresh data from the web and updates the language entry
- * @summary Trigger crawler for a language
+ * Returns Markdown content with bug-fix patterns, real diffs from GitHub commits, code structure templates, and reusable scripts for the given language
+ * @summary Get bug-fix guide for a language
+ */
+export const GetBugfixesParams = zod.object({
+  "slug": zod.coerce.string()
+})
+
+export const GetBugfixesResponse = zod.object({
+  "slug": zod.string(),
+  "name": zod.string(),
+  "content": zod.string().describe('Full Markdown content — bug-fix patterns, diffs, code structure, reusable scripts'),
+  "lastUpdated": zod.string().nullable().describe('ISO 8601 timestamp when this guide was last generated')
+})
+
+
+/**
+ * Fetches fresh data from Wikipedia and GitHub Linguist and updates the language entry
+ * @summary Trigger web crawler for a language
  */
 export const CrawlLanguageParams = zod.object({
   "slug": zod.coerce.string()
@@ -91,7 +110,7 @@ export const CrawlLanguageResponse = zod.object({
 
 /**
  * Crawls all language entries and updates them with fresh web data
- * @summary Trigger crawler for all languages
+ * @summary Trigger web crawler for all languages
  */
 export const CrawlAllLanguagesResponseItem = zod.object({
   "slug": zod.string(),
@@ -100,5 +119,21 @@ export const CrawlAllLanguagesResponseItem = zod.object({
   "updatedAt": zod.string()
 })
 export const CrawlAllLanguagesResponse = zod.array(CrawlAllLanguagesResponseItem)
+
+
+/**
+ * Searches GitHub for popular repositories, extracts bug-fix commits with diffs, code structure patterns, and generates a readable bug-fix guide
+ * @summary Trigger GitHub crawler for a language
+ */
+export const CrawlGitHubParams = zod.object({
+  "slug": zod.coerce.string()
+})
+
+export const CrawlGitHubResponse = zod.object({
+  "slug": zod.string(),
+  "success": zod.boolean(),
+  "message": zod.string(),
+  "updatedAt": zod.string()
+})
 
 

@@ -21,6 +21,7 @@ import type {
 
 import type {
   ApiError,
+  BugfixGuide,
   CrawlResult,
   HealthStatus,
   LanguageDetail,
@@ -374,6 +375,84 @@ export function useSearchLanguages<TData = Awaited<ReturnType<typeof searchLangu
 
 
 
+export const getGetBugfixesUrl = (slug: string,) => {
+
+
+
+
+  return `/api/bugfixes/${slug}`
+}
+
+/**
+ * Returns Markdown content with bug-fix patterns, real diffs from GitHub commits, code structure templates, and reusable scripts for the given language
+ * @summary Get bug-fix guide for a language
+ */
+export const getBugfixes = async (slug: string, options?: RequestInit): Promise<BugfixGuide> => {
+
+  return customFetch<BugfixGuide>(getGetBugfixesUrl(slug),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetBugfixesQueryKey = (slug: string,) => {
+    return [
+    `/api/bugfixes/${slug}`
+    ] as const;
+    }
+
+
+export const getGetBugfixesQueryOptions = <TData = Awaited<ReturnType<typeof getBugfixes>>, TError = ErrorType<ApiError>>(slug: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBugfixes>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetBugfixesQueryKey(slug);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getBugfixes>>> = ({ signal }) => getBugfixes(slug, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: slug !== null && slug !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getBugfixes>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetBugfixesQueryResult = NonNullable<Awaited<ReturnType<typeof getBugfixes>>>
+export type GetBugfixesQueryError = ErrorType<ApiError>
+
+
+/**
+ * @summary Get bug-fix guide for a language
+ */
+
+export function useGetBugfixes<TData = Awaited<ReturnType<typeof getBugfixes>>, TError = ErrorType<ApiError>>(
+ slug: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getBugfixes>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetBugfixesQueryOptions(slug,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
 export const getCrawlLanguageUrl = (slug: string,) => {
 
 
@@ -383,8 +462,8 @@ export const getCrawlLanguageUrl = (slug: string,) => {
 }
 
 /**
- * Fetches fresh data from the web and updates the language entry
- * @summary Trigger crawler for a language
+ * Fetches fresh data from Wikipedia and GitHub Linguist and updates the language entry
+ * @summary Trigger web crawler for a language
  */
 export const crawlLanguage = async (slug: string, options?: RequestInit): Promise<CrawlResult> => {
 
@@ -433,7 +512,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CrawlLanguageMutationError = ErrorType<ApiError>
 
     /**
- * @summary Trigger crawler for a language
+ * @summary Trigger web crawler for a language
  */
 export const useCrawlLanguage = <TError = ErrorType<ApiError>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof crawlLanguage>>, TError,{slug: string}, TContext>, request?: SecondParameter<typeof customFetch>}
@@ -456,7 +535,7 @@ export const getCrawlAllLanguagesUrl = () => {
 
 /**
  * Crawls all language entries and updates them with fresh web data
- * @summary Trigger crawler for all languages
+ * @summary Trigger web crawler for all languages
  */
 export const crawlAllLanguages = async ( options?: RequestInit): Promise<CrawlResult[]> => {
 
@@ -505,7 +584,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
     export type CrawlAllLanguagesMutationError = ErrorType<unknown>
 
     /**
- * @summary Trigger crawler for all languages
+ * @summary Trigger web crawler for all languages
  */
 export const useCrawlAllLanguages = <TError = ErrorType<unknown>,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof crawlAllLanguages>>, TError,void, TContext>, request?: SecondParameter<typeof customFetch>}
@@ -516,5 +595,77 @@ export const useCrawlAllLanguages = <TError = ErrorType<unknown>,
         TContext
       > => {
       return useMutation(getCrawlAllLanguagesMutationOptions(options));
+    }
+
+export const getCrawlGitHubUrl = (slug: string,) => {
+
+
+
+
+  return `/api/crawl/github/${slug}`
+}
+
+/**
+ * Searches GitHub for popular repositories, extracts bug-fix commits with diffs, code structure patterns, and generates a readable bug-fix guide
+ * @summary Trigger GitHub crawler for a language
+ */
+export const crawlGitHub = async (slug: string, options?: RequestInit): Promise<CrawlResult> => {
+
+  return customFetch<CrawlResult>(getCrawlGitHubUrl(slug),
+  {
+    ...options,
+    method: 'POST'
+
+
+  }
+);}
+
+
+
+
+
+export const getCrawlGitHubMutationOptions = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof crawlGitHub>>, TError,{slug: string}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof crawlGitHub>>, TError,{slug: string}, TContext> => {
+
+const mutationKey = ['crawlGitHub'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof crawlGitHub>>, {slug: string}> = (props) => {
+          const {slug} = props ?? {};
+
+          return  crawlGitHub(slug,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type CrawlGitHubMutationResult = NonNullable<Awaited<ReturnType<typeof crawlGitHub>>>
+
+    export type CrawlGitHubMutationError = ErrorType<ApiError>
+
+    /**
+ * @summary Trigger GitHub crawler for a language
+ */
+export const useCrawlGitHub = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof crawlGitHub>>, TError,{slug: string}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof crawlGitHub>>,
+        TError,
+        {slug: string},
+        TContext
+      > => {
+      return useMutation(getCrawlGitHubMutationOptions(options));
     }
 

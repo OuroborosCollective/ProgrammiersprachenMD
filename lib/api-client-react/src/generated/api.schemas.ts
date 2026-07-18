@@ -30,6 +30,11 @@ export interface LanguageSummary {
      * @nullable
      */
   lastCrawled?: string | null;
+  /**
+     * ISO 8601 timestamp of last GitHub crawl
+     * @nullable
+     */
+  lastGithubCrawled?: string | null;
 }
 
 export interface LanguageDetail {
@@ -44,6 +49,20 @@ export interface LanguageDetail {
   content: string;
   /** @nullable */
   lastCrawled?: string | null;
+  /** @nullable */
+  lastGithubCrawled?: string | null;
+}
+
+export interface BugfixGuide {
+  slug: string;
+  name: string;
+  /** Full Markdown content — bug-fix patterns, diffs, code structure, reusable scripts */
+  content: string;
+  /**
+     * ISO 8601 timestamp when this guide was last generated
+     * @nullable
+     */
+  lastUpdated: string | null;
 }
 
 export interface CrawlResult {

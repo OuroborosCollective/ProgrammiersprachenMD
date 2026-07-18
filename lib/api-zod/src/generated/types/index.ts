@@ -7,6 +7,7 @@
  */
 
 export * from './apiError';
+export * from './bugfixGuide';
 export * from './crawlResult';
 export * from './healthStatus';
 export * from './languageDetail';

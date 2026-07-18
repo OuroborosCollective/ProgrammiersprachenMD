@@ -27,4 +27,9 @@ export interface LanguageSummary {
      * @nullable
      */
   lastCrawled?: string | null;
+  /**
+     * ISO 8601 timestamp of last GitHub crawl
+     * @nullable
+     */
+  lastGithubCrawled?: string | null;
 }

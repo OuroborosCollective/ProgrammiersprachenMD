@@ -18,4 +18,6 @@ export interface LanguageDetail {
   content: string;
   /** @nullable */
   lastCrawled?: string | null;
+  /** @nullable */
+  lastGithubCrawled?: string | null;
 }

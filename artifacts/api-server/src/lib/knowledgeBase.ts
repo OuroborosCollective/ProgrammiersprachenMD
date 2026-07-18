@@ -18,6 +18,7 @@ export interface LanguageMeta {
   description: string;
   tags: string[];
   lastCrawled: string | null;
+  lastGithubCrawled: string | null;
 }
 
 export interface LanguageDetail extends LanguageMeta {
@@ -99,6 +100,16 @@ export function updateLastCrawled(slug: string, timestamp: string): void {
   const entry = index.find((l) => l.slug === slug);
   if (entry) {
     entry.lastCrawled = timestamp;
+    saveIndex(index);
+  }
+}
+
+/** Update the lastGithubCrawled timestamp for a language in the index. */
+export function updateLastGithubCrawled(slug: string, timestamp: string): void {
+  const index = loadIndex();
+  const entry = index.find((l) => l.slug === slug);
+  if (entry) {
+    entry.lastGithubCrawled = timestamp;
     saveIndex(index);
   }
 }
