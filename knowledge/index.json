@@ -1,0 +1,200 @@
+[
+  {
+    "slug": "python",
+    "name": "Python",
+    "year": 1991,
+    "paradigms": ["object-oriented", "imperative", "functional", "procedural", "reflective"],
+    "description": "Klare, lesbare Allzwecksprache mit riesigem Ökosystem, dominant in Data-Science, KI und Scripting.",
+    "tags": ["interpreted", "dynamic-typing", "high-level", "scripting", "data-science", "ai", "general-purpose"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "typescript",
+    "name": "TypeScript",
+    "year": 2012,
+    "paradigms": ["object-oriented", "functional", "imperative", "event-driven"],
+    "description": "Typisiertes JavaScript-Superset von Microsoft – Standard für große Frontend-Projekte und Node.js-Backends.",
+    "tags": ["compiled", "static-typing", "superset", "web", "frontend", "backend", "microsoft", "general-purpose"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "javascript",
+    "name": "JavaScript",
+    "year": 1995,
+    "paradigms": ["event-driven", "functional", "imperative", "object-oriented", "prototype-based"],
+    "description": "Die Sprache des Webs – läuft in jedem Browser und auf dem Server mit Node.js.",
+    "tags": ["interpreted", "dynamic-typing", "web", "frontend", "backend", "scripting", "event-driven"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "rust",
+    "name": "Rust",
+    "year": 2015,
+    "paradigms": ["systems", "functional", "imperative", "concurrent"],
+    "description": "Systemssprache ohne Garbage-Collector mit Speichersicherheit durch das Ownership-System – schnell wie C, sicher wie keine andere.",
+    "tags": ["compiled", "static-typing", "systems", "memory-safe", "concurrent", "wasm", "embedded"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "go",
+    "name": "Go",
+    "year": 2009,
+    "paradigms": ["imperative", "concurrent", "structured"],
+    "description": "Einfache, schnell kompilierende Systemssprache von Google – ideal für Cloud-Infrastruktur, Microservices und CLI-Tools.",
+    "tags": ["compiled", "static-typing", "concurrent", "cloud", "systems", "google"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "java",
+    "name": "Java",
+    "year": 1995,
+    "paradigms": ["object-oriented", "imperative", "functional", "reflective"],
+    "description": "Plattformunabhängige Enterprise-Sprache auf der JVM – 'Write once, run anywhere' seit 30 Jahren im Einsatz.",
+    "tags": ["compiled", "static-typing", "jvm", "enterprise", "object-oriented", "general-purpose"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "c",
+    "name": "C",
+    "year": 1972,
+    "paradigms": ["imperative", "structured", "procedural"],
+    "description": "Die Mutter der modernen Programmierung – nah an der Hardware, extrem performant, Basis für Betriebssysteme und Eingebettete Systeme.",
+    "tags": ["compiled", "static-typing", "systems", "embedded", "low-level", "portable"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "cpp",
+    "name": "C++",
+    "year": 1985,
+    "paradigms": ["object-oriented", "generic", "procedural", "functional", "systems"],
+    "description": "Erweiterung von C mit OOP, Generics und moderner Standardbibliothek – Hochleistungssprache für Spiele, Systeme und eingebettete Anwendungen.",
+    "tags": ["compiled", "static-typing", "systems", "performance", "object-oriented", "generic-programming"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "csharp",
+    "name": "C#",
+    "year": 2000,
+    "paradigms": ["object-oriented", "functional", "imperative", "generic", "component-oriented"],
+    "description": "Microsofts moderne .NET-Sprache – elegant, vielseitig und leistungsstark für Desktop, Web, Cloud und Spieleentwicklung (Unity).",
+    "tags": ["compiled", "static-typing", "dotnet", "enterprise", "microsoft", "game-development", "general-purpose"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "kotlin",
+    "name": "Kotlin",
+    "year": 2011,
+    "paradigms": ["object-oriented", "functional", "imperative"],
+    "description": "Moderne JVM-Sprache von JetBrains – offizielle Android-Sprache, Null-sicher, ausdrucksstark und Java-kompatibel.",
+    "tags": ["compiled", "static-typing", "jvm", "android", "multiplatform", "null-safe"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "swift",
+    "name": "Swift",
+    "year": 2014,
+    "paradigms": ["object-oriented", "functional", "protocol-oriented", "imperative"],
+    "description": "Apples moderne Systemssprache für iOS, macOS und darüber hinaus – sicher, schnell und ausdrucksstark mit Protocol-orientiertem Design.",
+    "tags": ["compiled", "static-typing", "apple", "ios", "macos", "systems", "null-safe"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "ruby",
+    "name": "Ruby",
+    "year": 1995,
+    "paradigms": ["object-oriented", "functional", "imperative", "reflective"],
+    "description": "Ausdrucksstarke, produktive Sprache – bekannt durch Rails und das Prinzip der Entwicklerfreude (Matz' Philosophie).",
+    "tags": ["interpreted", "dynamic-typing", "object-oriented", "scripting", "web", "metaprogramming"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "php",
+    "name": "PHP",
+    "year": 1994,
+    "paradigms": ["imperative", "object-oriented", "functional"],
+    "description": "Server-seitige Skriptsprache, die das Web antreibt – WordPress, Facebook und über 75% aller Websites nutzen PHP.",
+    "tags": ["interpreted", "dynamic-typing", "web", "server-side", "scripting"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "scala",
+    "name": "Scala",
+    "year": 2004,
+    "paradigms": ["functional", "object-oriented", "concurrent"],
+    "description": "Hybride OOP/FP-Sprache auf der JVM – Heimat von Apache Spark, Akka und typgesteuertem Functional Programming.",
+    "tags": ["compiled", "static-typing", "jvm", "functional", "big-data"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "haskell",
+    "name": "Haskell",
+    "year": 1990,
+    "paradigms": ["purely-functional", "lazy-evaluation", "declarative"],
+    "description": "Rein funktionale, lazy evaluierte Sprache mit dem stärksten Typsystem aller Mainstream-Sprachen – Referenzpunkt für FP-Forschung und korrekte Software.",
+    "tags": ["compiled", "static-typing", "functional", "pure", "lazy", "academic"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "elixir",
+    "name": "Elixir",
+    "year": 2012,
+    "paradigms": ["functional", "concurrent", "distributed"],
+    "description": "Funktionale, nebenläufige Sprache auf der Erlang-VM – exzellent für hochverfügbare, verteilte Systeme und Echtzeit-Anwendungen.",
+    "tags": ["compiled", "dynamic-typing", "functional", "concurrent", "distributed", "fault-tolerant", "beam"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "lua",
+    "name": "Lua",
+    "year": 1993,
+    "paradigms": ["imperative", "functional", "object-oriented", "prototype-based"],
+    "description": "Leichtgewichtige Einbettungssprache aus Brasilien – Standard-Skriptsprache in Spielen, Neovim und eingebetteten Systemen.",
+    "tags": ["interpreted", "dynamic-typing", "embeddable", "scripting", "lightweight", "gaming"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "r",
+    "name": "R",
+    "year": 1993,
+    "paradigms": ["functional", "array", "object-oriented", "imperative"],
+    "description": "Statistische Programmiersprache – Standard in Wissenschaft, Bioinformatik und Datenanalyse mit ggplot2, tidyverse und CRAN.",
+    "tags": ["interpreted", "dynamic-typing", "statistics", "data-science", "scientific", "functional"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "julia",
+    "name": "Julia",
+    "year": 2012,
+    "paradigms": ["scientific", "functional", "imperative", "multiple-dispatch"],
+    "description": "Hochleistungssprache für wissenschaftliche Berechnungen – Python-Lesbarkeit + C-Geschwindigkeit durch JIT-Kompilierung und Multiple-Dispatch.",
+    "tags": ["compiled", "dynamic-typing", "scientific", "numerical", "high-performance", "jit"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "dart",
+    "name": "Dart",
+    "year": 2011,
+    "paradigms": ["object-oriented", "functional", "imperative"],
+    "description": "Googles typsichere Sprache – die Basis von Flutter für plattformübergreifende Mobile-, Web- und Desktop-Anwendungen aus einer Codebasis.",
+    "tags": ["compiled", "static-typing", "flutter", "mobile", "google", "cross-platform"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "sql",
+    "name": "SQL",
+    "year": 1974,
+    "paradigms": ["declarative", "set-based", "relational"],
+    "description": "Die universelle Sprache für relationale Datenbanken – seit 50 Jahren der Standard für strukturierte Datenabfragen und -manipulation.",
+    "tags": ["declarative", "relational", "database", "query-language", "standard"],
+    "lastCrawled": null
+  },
+  {
+    "slug": "bash",
+    "name": "Bash",
+    "year": 1989,
+    "paradigms": ["imperative", "scripting", "pipeline"],
+    "description": "Die GNU-Shell und Skriptsprache – unverzichtbar für Unix/Linux-Systemadministration, DevOps-Automatisierung und CI/CD-Pipelines.",
+    "tags": ["interpreted", "dynamic-typing", "scripting", "unix", "devops", "automation", "shell"],
+    "lastCrawled": null
+  }
+]

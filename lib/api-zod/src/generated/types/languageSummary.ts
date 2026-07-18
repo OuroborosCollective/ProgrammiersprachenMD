@@ -5,9 +5,6 @@
  * Programmiersprachen-Wissensdatenbank API
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
 
 export interface LanguageSummary {
   /** URL-safe identifier (e.g. "python", "typescript") */
@@ -31,36 +28,3 @@ export interface LanguageSummary {
      */
   lastCrawled?: string | null;
 }
-
-export interface LanguageDetail {
-  slug: string;
-  name: string;
-  /** @nullable */
-  year?: number | null;
-  paradigms: string[];
-  description: string;
-  tags: string[];
-  /** Full Markdown content of the knowledge-base entry */
-  content: string;
-  /** @nullable */
-  lastCrawled?: string | null;
-}
-
-export interface CrawlResult {
-  slug: string;
-  success: boolean;
-  message: string;
-  updatedAt: string;
-}
-
-export interface ApiError {
-  error: string;
-}
-
-export type SearchLanguagesParams = {
-/**
- * Search query
- */
-q: string;
-};
-
