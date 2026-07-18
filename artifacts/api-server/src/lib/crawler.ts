@@ -153,6 +153,18 @@ export async function crawlLanguage(
     }
 
     const crawledContent = sections.join("\n\n");
+
+    // Guard: only write to disk if we actually have non-empty content.
+    // An empty write would corrupt the existing entry with a blank section.
+    if (!crawledContent.trim()) {
+      return {
+        slug,
+        success: false,
+        message: "Keine verwertbaren Inhalte gefunden — Datei wurde nicht verändert",
+        updatedAt: timestamp,
+      };
+    }
+
     mergeCrawledData(slug, crawledContent);
     updateLastCrawled(slug, timestamp);
 

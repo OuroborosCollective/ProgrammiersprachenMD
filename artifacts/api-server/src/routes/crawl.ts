@@ -23,7 +23,8 @@ router.post("/crawl/:slug", async (req, res): Promise<void> => {
   }
 
   const result = await crawlLanguage(lang.slug, lang.name);
-  res.json(CrawlLanguageResponse.parse(result));
+  const status = result.success ? 200 : 502;
+  res.status(status).json(CrawlLanguageResponse.parse(result));
 });
 
 router.post("/crawl", async (_req, res): Promise<void> => {

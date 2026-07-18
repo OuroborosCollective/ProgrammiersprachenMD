@@ -43,10 +43,19 @@ export default function LanguageDetail() {
             });
           }
         },
-        onError: () => {
+        onError: async (error) => {
+          // Try to extract the message from the API error body (returned as non-2xx).
+          let description = 'Wikipedia oder GitHub Linguist waren nicht erreichbar.';
+          try {
+            const raw = (error as { response?: Response }).response;
+            if (raw && typeof raw.json === 'function') {
+              const body = await raw.json() as { message?: string };
+              if (body?.message) description = body.message;
+            }
+          } catch { /* ignore parse errors */ }
           toast({
-            title: 'Crawl failed',
-            description: 'An error occurred while crawling.',
+            title: 'Crawler fehlgeschlagen',
+            description,
             variant: 'destructive',
           });
         },
